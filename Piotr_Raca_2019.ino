@@ -55,7 +55,6 @@
 #define E1_CS_PIN          44
 #endif
 
-// sterowanie temperaturą 
 LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
 int temp;
 double x, y;
@@ -110,7 +109,7 @@ void loop() {
   x = (double)temp;
   y = A * x * x * x + B * x * x + C * x + D;
   lcd.print(y);
-  // podgrzewanie
+  // sterowanie temperaturą 
   int Temp = 30;
   if (y < (Temp - 10)) {
     digitalWrite(MOSFET_D_PIN , HIGH);
@@ -160,7 +159,7 @@ void loop() {
     Serial.println("OK");
     czy_mam_odp = 0;
   }
-  // Połączenie szeregowe => zadanie przemieszenia
+  // Połączenie szeregowe => zadanie ruchu
   while (Serial.available() > 0)
   {
     komenda = Serial.readStringUntil('\n');
